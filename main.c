@@ -8,11 +8,12 @@ int main() {
     int negative_mark = -1;
     int questions[5] = {0,1,2,3,4};
 
-    srand(time(0)); // Seed random number generator
+    srand(time(0)); //  random  ques number generator
 
     // Correct shuffle
     for(int i = 4; i > 0; i--) {
         int j = rand() % (i + 1);
+        // code ensure no repeated ques
         int temp = questions[i];
         questions[i] = questions[j];
         questions[j] = temp;
@@ -55,19 +56,11 @@ int main() {
         }
 
         // Input validation loop
-        while(1){
-            printf("Enter answer (1-4): ");
-            if(scanf("%d",&answer)!=1){
-                printf("Invalid input! Enter a number.\n");
-                while(getchar()!='\n'); // clear buffer
-                continue;
-            }
-            if(answer<1 || answer>4){
-                printf("Wrong input! Choose between 1 and 4.\n");
-                continue;
-            }
-            break;
-        }
+        do {
+    printf("Enter answer (1-4): ");
+    scanf("%d", &answer);
+} while(answer < 1 || answer > 4);
+
 
         // Check answer
         if(answer == correct_answer)
@@ -75,7 +68,8 @@ int main() {
         else
             score += negative_mark;
 
-        if(score < 0) score = 0;
+        if(score < 0)
+            score = 0;
     }
 
     printf("\n===== QUIZ COMPLETED =====\n");
@@ -83,5 +77,6 @@ int main() {
 
     return 0;
 }
+
 
 
